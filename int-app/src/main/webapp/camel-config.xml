@@ -1,0 +1,12 @@
+<!-- here we have the Camel route(s). -->
+<!-- we must still use the http://camel.apache.org/schema/spring namespace so Camel can load the routes
+     though Spring JARs is not required -->
+<routes xmlns="http://camel.apache.org/schema/spring">
+
+    <route>
+        <!-- incoming requests from the servlet is routed -->
+        <from uri="http://localhost:8080?matchOnUriPrefix=true"/>
+        <to uri="http://localhost:8090?bridgeEndpoint=true"/>
+    </route>
+
+</routes>
