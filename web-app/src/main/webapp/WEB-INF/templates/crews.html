@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title th:text="#{general.title}">AS manager</title>
+    <link rel="stylesheet"
+          href="../../resources/static/css/font-awesome.min.css"
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+</head>
+<body>
+
+
+<nav class=" p-0 pl-2 navbar navbar-expand-sm navbar-dark bg-success text-light">
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarsNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="calls.html"
+       th:href="@{/calls}"
+       class="navbar-brand">
+        <img src="../../resources/static/img/asLogoR.svg"
+             th:src="@{/resources/static/img/asLogoR.svg}" width="64" height="32"></a>
+    <div class="collapse navbar-collapse" id="navbarsNav">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link  active"
+               href="crews.html"
+               th:href="@{/crews}"
+               th:text="#{general.crews}">Crews<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link"
+               href="calls.html"
+               th:href="@{/calls}"
+               th:text="#{general.calls}">Calls</a>
+            <a class="nav-item nav-link"
+               href="cars.html"
+               th:href="@{/cars}"
+               th:text="#{general.cars}">Cars</a>
+        </div>
+    </div>
+</nav>
+
+<header>
+    <nav class=" p-0 pl-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
+        <a href="crews.html"
+           th:href="@{/crews}" class="navbar-brand text-uppercase mr-auto"
+           th:text="#{general.crews}">Crews</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="crew.html"
+                   th:href="@{/crew}"
+                   class="btn btn-light"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="Add crew"
+                   th:title="#{crew.tooltipAdd}">
+                    <i class="fa fa-plus"></i><span class="d-none d-sm-inline"
+                                                    th:text="#{general.add}">Add</span></a>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+<div class="container">
+    <form id="filterForm"
+          th:object="${datesRange}"
+          action="crews.html"
+          th:action="@{/filterCrews}"
+          th:method="@{post}">
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-sm mb-6">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                              id="inputGroup-startDate"
+                              th:text="#{general.from}">From</span>
+                    </div>
+                    <input type="date" class="form-control" aria-label="Small"
+                           aria-describedby="inputGroup-sizing-sm"
+                           th:field="${datesRange.dateFrom}">
+
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                              id="inputGroup-endDate"
+                              th:text="#{general.to}">To</span>
+                    </div>
+                    <input type="date" class="form-control" aria-label="Small"
+                           aria-describedby="inputGroup-sizing-sm"
+                           th:field="${datesRange.dateTo}">
+                    <a href="calls.html"
+                       th:href="@{/filterCrews}"
+                       th:onclick="@{document.forms['filterForm'].submit(); return false;}"
+                       class="btn-sm btn-light"
+                       data-toggle="tooltip"
+                       data-placement="bottom"
+                       title="Filter"
+                       th:title="#{general.filter}">
+                        <i class="fa fa-filter"></i></a>
+                </div>
+                <div class="col-3">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-3">
+                <label class="d-none d-sm-inline text-danger"
+                       for="inputGroup-startDate"
+                       th:if="${#fields.hasErrors('dateFrom')}"
+                       th:text="#{general.dateError}">error</label>
+            </div>
+            <div class="col-3">
+                <label class="d-none d-sm-inline text-danger"
+                       for="inputGroup-endDate"
+                       th:if="${#fields.hasErrors('dateTo')}"
+                       th:text="#{general.dateError}">error</label>
+            </div>
+            <div class="col-3">
+            </div>
+        </div>
+    </form>
+</div>
+
+<section id="cars">
+    <div class="container-fluid">
+        <div class="row">
+           <div class="col">
+                <div class="card" th:if="not ${crews.isEmpty()}">
+                    <table class="table table-striped">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th th:text="#{crew.Name}">Name</th>
+                            <th th:text="#{crew.description}">Description</th>
+                            <th th:text="#{crew.numberOfCalls}">Number of calls</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="crew : ${crews}">
+                            <td th:text="${crew.crewName}"><!--&nbsp;&nbsp;&nbsp;-->Crew1</td>
+                            <td th:text="${crew.description}">Some Crew</td>
+                            <td th:text="${crew.numberOfCalls}">1</td>
+
+                            <td class="text-right">
+                                <a href="crew.html"
+                                   th:href="'/editCrew/'+${crew.crewId}"
+                                   class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit crew"
+                                   th:title="#{crew.tooltipEdit}">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"
+                                                                       th:text="#{general.edit}">Edit</span>
+                                </a>
+                                <span th:if="${crew.numberOfCalls}==0">
+                                <a href="#" class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete crew"
+                                   th:title="#{crew.tooltipDelete}">
+                                <span data-toggle="modal"
+                                      data-target="#confirmDeleteModal"
+                                      th:attr="data-id=${crew.crewId},
+                                               data-name=${crew.crewName}">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"
+                                                                       th:text="#{general.delete}">Delete</span>
+                                </span>
+
+                                </a>
+                                </span>
+                                <span th:unless="${crew.numberOfCalls}==0">
+                                    <a href="#" class="btn-sm btn-outline-secondary"
+                                       data-toggle="tooltip"
+                                       data-target="cannotDelete"
+                                       data-placement="top"
+                                       title="Delete car"
+                                       th:title="#{crew.tooltipDelete}">
+                                <span data-toggle="modal"
+                                      data-target="#cannotDelete">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"
+                                                                       th:text="#{general.delete}">Delete</span>
+                                </span>
+
+                                </a>
+                                </span>
+
+                            </td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>Crew2</td>
+                            <td>3</td>
+                            <td>some crew2</td>
+                            <td class="text-right">
+                                <a href="crew.html"
+                                   th:href="@{/crew/2}"
+                                   class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit crew">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
+                                </a>
+                                <a href="#" class="btn-sm btn-outline-secondary"
+
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete crew">
+                                <span data-toggle="modal" data-target="#confirmDeleteModal">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
+
+                                </span>
+
+                                </a>
+
+                            </td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>Crew3</td>
+                            <td>6</td>
+                            <td>Some crew3</td>
+                            <td class="text-right">
+                                <a href="crew.html" class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit crew">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
+                                </a>
+                                <a href="#" class="btn-sm btn-outline-secondary"
+
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete crew">
+                                <span data-toggle="modal" data-target="#confirmDeleteModal">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
+
+                                </span>
+
+                                </a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card alert alert-info" th:if="${crews.isEmpty()}" align="center">
+            <h2 th:text="#{crew.plAddCar}">Please add crews.</h2>
+        </div>
+    </div>
+
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <h5 class="modal-title" id="exampleModalLabel"
+                    th:text="#{crew.modalTitle}">Delete crew</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please confirm delete
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        th:text="#{general.cancel}">Cancel
+                </button>
+                <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>-->
+                <a id="deleteUrl" href="#" class="btn btn-danger"
+                   th:text="#{general.delete}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cannotDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-info">
+                <h5 class="modal-title" id="exampleCannotDelete">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" th:text="#{crew.cannotDelete}">
+                Can't delete
+            </div>
+            <div class="modal-footer" align="left">
+                <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>-->
+                <a id="return" th:href="@{/crews}" class="btn btn-info"
+                   th:text="#{general.ok}">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#confirmDeleteModal').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Please confirm delete crew: "' + target.data('name') + '"')
+        document.getElementById('deleteUrl').href = '/crew/' + target.data('id') + '/delete';
+    })
+</script>
+
+</body>
+</html>
