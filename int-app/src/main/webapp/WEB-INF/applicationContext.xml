@@ -11,20 +11,6 @@
        http://camel.apache.org/schema/spring/camel-spring.xsd">
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
-        <!--<restConfiguration component="jetty" host="localhost" port="8088"/>-->
-        <!--<rest path="/call">-->
-            <!--<get>-->
-                <!--<to uri="direct:hi"/>-->
-            <!--</get>-->
-        <!--</rest>-->
-        <!--<route>-->
-            <!--<from uri="direct:hi"/>-->
-            <!--<to uri="http://localhost:8090/call"/>-->
-        <!--</route>-->
-        <!--<endpoint id="cal" uri="http://localhost:8090/call"/>-->
-
-
-
         <route>
             <from uri="http://localhost:8080?matchOnUriPrefix=true"/>
             <to uri="http://localhost:8090?bridgeEndpoint=true"/>
