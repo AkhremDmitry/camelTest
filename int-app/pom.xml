@@ -14,19 +14,9 @@
     <groupId>com.epam.brest.course</groupId>
     <artifactId>int-app</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
     <name>int-app</name>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-spring -->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.camel</groupId>-->
-            <!--<artifactId>camel-spring</artifactId>-->
-        <!--</dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-http-common -->
         <dependency>
@@ -45,42 +35,8 @@
             <artifactId>camel-jetty</artifactId>
             <version>2.12.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-servlet</artifactId>
-            <version>2.12.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-servletlistener</artifactId>
-            <version>2.12.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-cxf</artifactId>
-            <version>2.12.1</version>
-        </dependency>
-
-
-
-
-
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <!-- embedded Jetty server, for testing -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <configuration>
-                    <httpConnector>
-                        <port>8080</port>
-                    </httpConnector>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     
 </project>

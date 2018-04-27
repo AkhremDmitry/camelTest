@@ -14,8 +14,9 @@ Building
      
  Run in a jetty server:
  
-     mvn jetty:run
+     mvn -pl rest-server/ jetty:run
+     mvn -pl web-app/ jetty:run
 
  Once started, the application should be available at:
  
-     http://localhost:8080/
+     http://localhost:8088/

@@ -7,5 +7,7 @@ public class CamelJettyExample {
         Main main = new Main();
         main.addRouteBuilder(new MyCamelJettyBuilder());
         main.run();
+
+
     }
 }
