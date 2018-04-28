@@ -2,11 +2,13 @@ package com.epam.brest.course.dao;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Date;
 
 /**
  * POJO Call.
  */
+@XmlRootElement(name = "call")
 public class Call {
 
     /**
