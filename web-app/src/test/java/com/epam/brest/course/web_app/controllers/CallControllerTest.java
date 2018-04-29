@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.Arrays;
@@ -109,19 +110,19 @@ public class CallControllerTest {
 
         EasyMock.verify(mockCrewService);
     }
-
-    @Test
-    public void addCallTest() throws Exception {
-        EasyMock.expect(mockCallService.addCall(CALL)).andReturn(CALL);
-        EasyMock.replay(mockCallService);
-
-        mockMvc.perform(MockMvcRequestBuilderUtils.postForm("/call", CALL))
-                .andDo(print())
-                .andExpect(status().isFound())
-                .andExpect(view().name("redirect:/calls"));
-
-        EasyMock.verify(mockCallService);
-    }
+//
+//    @Test
+//    public void addCallTest() throws Exception {
+//        EasyMock.expect(mockCallService.addCall(CALL)).andReturn(CALL);
+//        EasyMock.replay(mockCallService);
+//
+//        mockMvc.perform(MockMvcRequestBuilderUtils.postForm("/call", CALL))
+//                .andDo(print())
+//                .andExpect(status().isFound())
+//                .andExpect(view().name("redirect:/calls"));
+//
+//        EasyMock.verify(mockCallService);
+//    }
 
     @Test
     public void getUpdateCallTest() throws Exception {
@@ -152,20 +153,20 @@ public class CallControllerTest {
         EasyMock.verify(mockCrewService);
     }
 
-    @Test
-    public void updateCallTest() throws Exception {
-        mockCallService.updateCall(CALL);
-        EasyMock.expectLastCall();
-        EasyMock.replay(mockCallService);
-
-        mockMvc.perform(MockMvcRequestBuilderUtils
-                .postForm("/editCall/" + CALL.getCallId(), CALL))
-                .andDo(print())
-                .andExpect(status().isFound())
-                .andExpect(view().name("redirect:/calls"));
-
-        EasyMock.verify(mockCallService);
-    }
+//    @Test
+//    public void updateCallTest() throws Exception {
+//        mockCallService.updateCall(CALL);
+//        EasyMock.expectLastCall();
+//        EasyMock.replay(mockCallService);
+//
+//        mockMvc.perform(MockMvcRequestBuilderUtils
+//                .postForm("/editCall/" + CALL.getCallId(), CALL))
+//                .andDo(print())
+//                .andExpect(status().isFound())
+//                .andExpect(view().name("redirect:/calls"));
+//
+//        EasyMock.verify(mockCallService);
+//    }
 
     @Test
     public void deleteCrewTest() throws Exception {
