@@ -34,7 +34,7 @@ public class CrewRestClientTest {
     private RestTemplate mockRestTemplate;
 
     private Crew expCrew = new Crew();
-    private static final String URL = "http://localhost:8080/";
+    private static final String URL = "http://localhost:8090/";
 
     @Before
     public void setUp(){

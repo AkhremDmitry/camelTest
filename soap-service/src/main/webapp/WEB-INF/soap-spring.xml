@@ -17,9 +17,13 @@
        http://cxf.apache.org/jaxws
        http://cxf.apache.org/schemas/jaxws.xsd">
 
-    <!--http://localhost:8080/soap/webserviceSEI?wsdl-->
-    <jaxws:endpoint id="CallSoapControllerImpl" address="/webserviceSEI"
+    <!--http://localhost:8080/soap/webCall?wsdl-->
+    <jaxws:endpoint id="CallSoapControllerImpl" address="/webCall"
                     implementor="com.epam.brest.course.soap.CallSoapControllerImpl"/>
+    <jaxws:endpoint id="CarSoapControllerImpl" address="/webCar"
+                    implementor="com.epam.brest.course.soap.CarSoapControllerImpl"/>
+    <jaxws:endpoint id="CrewSoapControllerImpl" address="/webCrew"
+                    implementor="com.epam.brest.course.soap.CrewSoapControllerImpl"/>
 
     <mvc:annotation-driven/>
     <!-- Component scan for @Controller, @Service... annotations -->

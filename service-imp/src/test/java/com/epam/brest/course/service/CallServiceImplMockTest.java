@@ -31,7 +31,7 @@ public class CallServiceImplMockTest {
 
     @BeforeClass
     public static void before() {
-        CALL.setDateCall(Date.valueOf("2018-3-14"));
+//        CALL.setDateCall(Date.valueOf("2018-3-14"));
         CALL.setDescription("Some description");
         CALL.setAddress("Address");
         CALL.setCrewId(1);

@@ -31,7 +31,7 @@ public class CallSoapControllerImpl implements CallSoapController {
     @Override
     public final Collection<Call> getAllCallByDate(final String startDate, final String endDate) {
         LOGGER.debug("SOAP: getAllCallByDate({}, {})", startDate, endDate);
-        return callService.getAllCallByDate(Date.valueOf(startDate), Date.valueOf(startDate));
+        return callService.getAllCallByDate(Date.valueOf(startDate), Date.valueOf(endDate));
     }
 
     @Override

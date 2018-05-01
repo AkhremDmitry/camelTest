@@ -35,7 +35,7 @@ public class CallRestClientTest {
     private Call expCall = new Call();
     private Date startDate;
     private Date endDate;
-    private static final String URL = "http://localhost:8080/";
+    private static final String URL = "http://localhost:8090/";
 
     @After
     public void after() {

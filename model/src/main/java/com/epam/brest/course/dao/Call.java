@@ -1,9 +1,11 @@
 package com.epam.brest.course.dao;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 import java.util.Date;
 
 
@@ -11,7 +13,7 @@ import java.util.Date;
  * POJO Call.
  */
 @XmlRootElement(name = "call")
-public class Call implements Serializable {
+public class Call {
 
     /**
      * Property id.
@@ -21,6 +23,7 @@ public class Call implements Serializable {
     /**
      * Property date.
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateCall;
 
     /**
