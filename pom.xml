@@ -24,6 +24,7 @@
         <module>web-app</module>
         <module>int-app</module>
         <module>soap-service</module>
+        <module>soap-simple-client</module>
     </modules>
 
     <distributionManagement>
@@ -89,6 +90,11 @@
             <dependency>
                 <groupId>com.epam.brest.course</groupId>
                 <artifactId>rest-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>soap-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
