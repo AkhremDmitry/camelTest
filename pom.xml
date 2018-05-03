@@ -24,6 +24,7 @@
         <module>web-app</module>
         <module>int-app</module>
         <module>soap-service</module>
+        <module>soap-service-impl</module>
         <module>soap-simple-client</module>
     </modules>
 
