@@ -13,6 +13,8 @@
     <groupId>com.epam.brest.course</groupId>
     <artifactId>soap-simple-client</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>soap-simple-client</name>
+
 
     <dependencies>
         <dependency>

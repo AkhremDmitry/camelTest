@@ -15,16 +15,16 @@ import java.sql.Date;
 public class CallSoapControllerImplTest {
 
     private static Server server;
-    private final static int PORT = 8080;
+    private final static int PORT = 8070;
     private static WebAppContext context;
     private static CallSoapController callSOAP;
-    private static String soapServiceUrl = "http://localhost:8080/soap/webCall";
+    private static String soapServiceUrl = "http://localhost:8070/soap/webCall";
 
     @BeforeClass
     public static void init() throws Exception {
         server = new Server(PORT);
         context = new WebAppContext();
-        context.setDescriptor("src/main/webapp/WEB-INF/web.xml");
+        context.setDescriptor("src/test/resources/web.xml");
         context.setResourceBase("src/main/webapp");
         context.setContextPath("/");
         context.setParentLoaderPriority(true);
@@ -76,6 +76,67 @@ public class CallSoapControllerImplTest {
         Assert.assertEquals(expCall.getDescription(), actCall.getDescription());
         Assert.assertEquals(expCall.getCrewId(), actCall.getCrewId());
         Assert.assertEquals(expCall.getDateCall(), actCall.getDateCall());
+    }
+
+    @Test
+    public void addCallTest(){
+        Call expCall = new Call();
+        expCall.setDateCall(Date.valueOf("2017-2-10"));
+        expCall.setDescription("Some for addTest");
+        expCall.setAddress("Address addTest");
+        expCall.setCrewId(1);
+        int expNumOfCalls = callSOAP.getAllCalls().size() + 1;
+        Call actCall = callSOAP.addCall(expCall);
+        int actNumOfcalls = callSOAP.getAllCalls().size();
+        Assert.assertEquals(expNumOfCalls, actNumOfcalls);
+
+        Assert.assertEquals(expCall.getAddress(), actCall.getAddress());
+        Assert.assertEquals(expCall.getDescription(), actCall.getDescription());
+        Assert.assertEquals(expCall.getCrewId(), actCall.getCrewId());
+        Assert.assertEquals(expCall.getDateCall(), actCall.getDateCall());
+    }
+
+    @Test
+    public void updateCall(){
+        Call call = new Call();
+        call.setDateCall(Date.valueOf("2016-07-22"));
+        call.setDescription("Prepare for update test");
+        call.setAddress("Address");
+        call.setCrewId(1);
+
+        Call expCall = new Call();
+        expCall.setDateCall(Date.valueOf("2018-05-04"));
+        expCall.setDescription("update test");
+        expCall.setAddress("Address for update");
+        expCall.setCrewId(1);
+        int updatedCallId = callSOAP.addCall(call).getCallId();
+        expCall.setCallId(updatedCallId);
+
+        int expNumOfCalls = callSOAP.getAllCalls().size();
+
+        callSOAP.updateCall(expCall);
+
+        Call actCall = callSOAP.getCallById(updatedCallId);
+        int actNumOfCalls = callSOAP.getAllCalls().size();
+
+        Assert.assertEquals(expNumOfCalls, actNumOfCalls);
+
+        Assert.assertEquals(expCall.getAddress(), actCall.getAddress());
+        Assert.assertEquals(expCall.getDescription(), actCall.getDescription());
+        Assert.assertEquals(expCall.getCrewId(), actCall.getCrewId());
+        Assert.assertEquals(expCall.getDateCall(), actCall.getDateCall());
+    }
+
+    @Test
+    public void deleteCallById(){
+        Call call = new Call(Date.valueOf("2018-05-04"), "delete", "Address for delete", 1);
+        call = callSOAP.addCall(call);
+        int expNumOfCalls = callSOAP.getAllCalls().size()-1;
+
+        callSOAP.deleteCallById(call.getCallId());
+        int actNumOfCalls = callSOAP.getAllCalls().size();
+
+        Assert.assertEquals(expNumOfCalls, actNumOfCalls);
     }
 
 

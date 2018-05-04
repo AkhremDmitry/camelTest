@@ -27,10 +27,10 @@
             <artifactId>soap-service</artifactId>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>com.epam.brest.course</groupId>-->
-        <!--<artifactId>service</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.epam.brest.course</groupId>
+            <artifactId>test-db</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.epam.brest.course</groupId>
             <artifactId>service-imp</artifactId>
