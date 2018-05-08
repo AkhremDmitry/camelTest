@@ -20,6 +20,8 @@
     <!--http://localhost:8080/soap/webCall?wsdl-->
     <jaxws:endpoint id="CallSoapControllerImpl" address="/webCall"
                     implementor="com.epam.brest.course.soap.CallSoapControllerImpl"/>
+    <jaxws:endpoint id="CarSoapControllerImpl" address="/webCar"
+                    implementor="com.epam.brest.course.soap.CarSoapControllerImpl"/>
 
     <mvc:annotation-driven/>
     <!-- Component scan for @Controller, @Service... annotations -->
