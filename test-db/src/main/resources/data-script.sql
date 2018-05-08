@@ -3,7 +3,7 @@ VALUES ('3347 AO-1', 'Paramedics');
 INSERT INTO car (registrationPlate, description)
 VALUES ('5569 BC-1', 'Emergency care');
 INSERT INTO crew (crewName, description, carId)
-VALUES ('Crew1', 'Some Crew1', 1);
+  VALUES ('Crew1', 'Some Crew1', 1);
 INSERT INTO crew (crewName, description, carId)
 VALUES ('Crew2', 'Some Crew2', 2);
 INSERT INTO crew (crewName, description, carId)

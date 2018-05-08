@@ -22,6 +22,8 @@
                     implementor="com.epam.brest.course.soap.CallSoapControllerImpl"/>
     <jaxws:endpoint id="CarSoapControllerImpl" address="/webCar"
                     implementor="com.epam.brest.course.soap.CarSoapControllerImpl"/>
+    <jaxws:endpoint id="CrewSoapControllerImpl" address="/webCrew"
+                    implementor="com.epam.brest.course.soap.CrewSoapControllerImpl"/>
 
     <mvc:annotation-driven/>
     <!-- Component scan for @Controller, @Service... annotations -->
