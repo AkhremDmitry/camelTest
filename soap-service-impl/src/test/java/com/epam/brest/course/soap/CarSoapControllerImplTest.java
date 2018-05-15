@@ -4,10 +4,8 @@ import com.epam.brest.course.dao.Car;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+//import org.junit.rules.ExpectedException;
 
 public class CarSoapControllerImplTest {
 
@@ -16,6 +14,9 @@ public class CarSoapControllerImplTest {
     private static WebAppContext context;
     private static CarSoapController carSOAP;
     private static String soapServiceUrl = "http://localhost:8070/soap/webCar";
+
+//    @Rule
+//    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void init() throws Exception {
@@ -75,6 +76,14 @@ public class CarSoapControllerImplTest {
         Assert.assertEquals(expNumOfCar, actNumOfCar);
         Assert.assertEquals(expCar, actCar);
     }
+
+//    @Test
+//    public void addCarTestWithRule(){
+//        Car expCar = new Car("3347 AO-1", "testAddCar");
+//        thrown.expect(IllegalArgumentException.class);
+//        thrown.expectMessage("Car with the same registration plate already exists in DB.");
+//        carSOAP.addCar(expCar);
+//    }
 
     @Test
     public void updateCarTest(){
