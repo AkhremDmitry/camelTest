@@ -6,6 +6,9 @@ public class MyCamelJettyBuilder extends RouteBuilder {
 
     public void configure() {
         from("jetty:http://0.0.0.0:8080?matchOnUriPrefix=true")
+
+                .to("file:/home/felix/tmp/req?allowNullBody=true")
+
                 .to("http://localhost:8090?bridgeEndpoint=true");
 
     }

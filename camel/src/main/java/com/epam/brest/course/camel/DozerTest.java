@@ -1,4 +1,4 @@
-package com.epam.brest.course.intapp;
+package com.epam.brest.course.camel;
 
 import com.epam.brest.course.dao.Call;
 import com.epam.brest.course.dao.Car;
@@ -42,6 +42,7 @@ public class DozerTest {
 
         CallDto callDto1 = mapper.map(call, CallDto.class);
         System.out.println("Call --> CallDto: " + callDto1);
+
 
     }
 }
