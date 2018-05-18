@@ -37,7 +37,7 @@ public class CallRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/calls/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public final Call getCallById(@PathVariable final int id) {
         LOGGER.debug("getCallById({})", id);
         Call call = callService.getCallById(id);

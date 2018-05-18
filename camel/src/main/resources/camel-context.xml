@@ -35,7 +35,6 @@
       <setProperty propertyName="respBody">
         <simple>${in.body}</simple>
       </setProperty>
-      <!--<to uri="dozer:transformOrder?mappingFile=dozerBeanMapping.xml&amp;targetModel=CallDto.class"/>-->
       <process ref="dozerProcessor" />
       <to uri="file:/home/felix/tmp/resp"/>
       <setBody>
@@ -49,6 +48,7 @@
       <setProperty propertyName="reqBody">
         <simple>${in.body}</simple>
       </setProperty>
+      <process ref="dozerProcessor" />
       <to uri="file:/home/felix/tmp/req?allowNullBody=true"/>
       <setBody>
         <simple>${property.reqBody}</simple>

@@ -108,7 +108,7 @@ public class CallRestControllerTest {
         mockMvc.perform(
                 get("/calls/" + ID)
                         .accept(MediaType.APPLICATION_JSON)
-        ).andDo(print()).andExpect(status().isFound())
+        ).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("callId", Matchers.is(1)))
                 .andExpect(jsonPath("dateCall", Matchers.is(DATECALL.getTime())))

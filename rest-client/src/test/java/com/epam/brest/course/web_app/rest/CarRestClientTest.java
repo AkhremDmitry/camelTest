@@ -33,7 +33,7 @@ public class CarRestClientTest {
     private RestTemplate mockRestTemplate;
 
     private Car expCar = new Car();
-    private static final String URL = "http://localhost:8090/";
+    private static final String URL = "http://localhost:8050/";
 
     @After
     public void after() {
