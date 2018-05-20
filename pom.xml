@@ -22,7 +22,6 @@
         <module>rest-server</module>
         <module>rest-client</module>
         <module>web-app</module>
-        <module>int-app</module>
         <module>soap-service</module>
         <module>soap-service-impl</module>
         <module>soap-simple-client</module>

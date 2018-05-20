@@ -14,15 +14,6 @@
     <link rel="stylesheet"
           href="../../resources/static/css/style.css"
           th:href="@{/resources/static/css/style.css}">
-
-    <link rel="stylesheet"
-          media="screen"
-          href="../../resources/static/css/bootstrap.min.css"
-          th:href="@{/resources/static/css/bootstrap.min.css}">
-    <link rel="stylesheet"
-          media="screen"
-          href="../../resources/static/css/bootstrap-datetimepicker.min.css"
-          th:href="@{/resources/static/css/bootstrap-datetimepicker.min.css}">
 </head>
 <body>
 
@@ -108,23 +99,6 @@
                             name=""
                             type="hidden"
                             th:field="*{callId}"/>
-
-                            <div
-                                 class="input-append date form_datetime">
-                                <label th:text="#{call.dateCall}">
-                                    Date&Time
-                                </label>
-                                <span class="add-on">
-                                    <i class="fa fa-calendar"></i>
-                                </span>
-                                <input th:field="*{dateCall}"
-                                       class="form-control"
-                                       size="16"
-                                       type="datetime"
-                                       value=""
-                                       readonly>
-                            </div>
-
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
                                        for="field_date"
@@ -138,8 +112,6 @@
                                        th:if="${#fields.hasErrors('dateCall')}"
                                        th:text="#{general.dateError}">error</label>
                             </div>
-
-
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
                                        for="descriptionInput"
@@ -203,26 +175,11 @@
         th:src="@{/resources/static/js/popper.min.js}"></script>
 <script src="../../resources/static/js/bootstrap.min.js"
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
-<script src="../../resources/static/js/bootstrap-datetimepicker.js"
-        th:src="@{/resources/static/js/bootstrap-datetimepicker.js}"
-        type="text/javascript"
-        charset="UTF-8"></script>
-<script src="../../resources/static/js/locales/bootstrap-datetimepicker.ru.js"
-        th:src="@{/resources/static/js/locales/bootstrap-datetimepicker.ru.js}"
-        type="text/javascript"
-        charset="UTF-8"></script>
 
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
-</script>
-<script type="text/javascript">
-    $(".form_datetime").datetimepicker({
-        format: "yyyy-mm-dd",
-        autoclose: true,
-        todayBtn: true,
-    });
 </script>
 </body>
 </html>
