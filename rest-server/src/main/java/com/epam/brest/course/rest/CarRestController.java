@@ -29,7 +29,7 @@ public class CarRestController {
 
     //curl -v localhost:8090/cars/1
     @GetMapping(value = "/cars/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public final Car getCarById(@PathVariable final int id) {
         LOGGER.debug("getCarById({})", id);
         return carService.getCarById(id);

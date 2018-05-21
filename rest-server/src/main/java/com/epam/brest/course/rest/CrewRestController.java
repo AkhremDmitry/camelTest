@@ -28,7 +28,7 @@ public class CrewRestController {
     }
 
     @GetMapping(value = "/crews/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public final Crew getCrewById(@PathVariable final int id) {
         LOGGER.debug("getCrewById({})", id);
         return crewService.getCrewById(id);

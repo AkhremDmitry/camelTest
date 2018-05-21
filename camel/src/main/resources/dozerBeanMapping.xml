@@ -11,11 +11,15 @@
     </configuration>
 
     <mapping>
-        <class-a>com.epam.brest.course.dao.Car</class-a>
-        <class-b>com.epam.brest.course.dto.CarDT</class-b>
+        <class-a>com.epam.brest.course.dao.Crew</class-a>
+        <class-b>com.epam.brest.course.dozerDto.CrewDozerDto</class-b>
         <field>
-            <a>registrationPlate</a>
-            <b>registrationPlateDto</b>
+            <a>crewId</a>
+            <b>crewIdDto</b>
+        </field>
+        <field>
+            <a>crewName</a>
+            <b>crewNameDto</b>
         </field>
         <field>
             <a>description</a>
@@ -26,10 +30,91 @@
             <b>carIdDto</b>
         </field>
     </mapping>
+    <mapping>
+        <class-a>com.epam.brest.course.dto.CrewDto</class-a>
+        <class-b>com.epam.brest.course.dozerDto.CrewDozerSimpleDto</class-b>
+        <field>
+            <a>crewId</a>
+            <b>crewIdDto</b>
+        </field>
+        <field>
+            <a>crewName</a>
+            <b>crewNameDto</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>com.epam.brest.course.dto.CrewDtoWithCall</class-a>
+        <class-b>com.epam.brest.course.dozerDto.CrewDozerDtoWithCall</class-b>
+        <field>
+            <a>crewId</a>
+            <b>crewIdDto</b>
+        </field>
+        <field>
+            <a>crewName</a>
+            <b>crewNameDto</b>
+        </field>
+        <field>
+            <a>description</a>
+            <b>descriptionDto</b>
+        </field>
+        <field>
+            <a>numberOfCalls</a>
+            <b>numberOfCallsDto</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.epam.brest.course.dao.Car</class-a>
+        <class-b>com.epam.brest.course.dozerDto.CarDozerDto</class-b>
+        <field>
+            <a>carId</a>
+            <b>carIdDto</b>
+        </field>
+        <field>
+            <a>registrationPlate</a>
+            <b>registrationPlateDto</b>
+        </field>
+        <field>
+            <a>description</a>
+            <b>descriptionDto</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>com.epam.brest.course.dto.CarDtoWithCrew</class-a>
+        <class-b>com.epam.brest.course.dozerDto.CarDozerDtoWithCrew</class-b>
+        <field>
+            <a>carId</a>
+            <b>carIdDto</b>
+        </field>
+        <field>
+            <a>registrationPlate</a>
+            <b>registrationPlateDto</b>
+        </field>
+        <field>
+            <a>description</a>
+            <b>descriptionDto</b>
+        </field>
+        <field>
+            <a>numberOfCrew</a>
+            <b>numberOfCrewDto</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>com.epam.brest.course.dto.CarDto</class-a>
+        <class-b>com.epam.brest.course.dozerDto.CarDozerSimpleDto</class-b>
+        <field>
+            <a>carId</a>
+            <b>carIdDto</b>
+        </field>
+        <field>
+            <a>registrationPlate</a>
+            <b>registrationPlateDto</b>
+        </field>
+    </mapping>
 
     <mapping>
         <class-a>com.epam.brest.course.dao.Call</class-a>
-        <class-b>com.epam.brest.course.dto.CallDto</class-b>
+        <class-b>com.epam.brest.course.dozerDto.CallDozerDto</class-b>
         <field>
             <a>callId</a>
             <b>callIdDto</b>
@@ -51,7 +136,4 @@
             <b>crewIdDto</b>
         </field>
     </mapping>
-
-
-
 </mappings>

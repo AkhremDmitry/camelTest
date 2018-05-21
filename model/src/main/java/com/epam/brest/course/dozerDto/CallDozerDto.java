@@ -1,8 +1,8 @@
-package com.epam.brest.course.dto;
+package com.epam.brest.course.dozerDto;
 
 import java.sql.Date;
 
-public class CallDto {
+public class CallDozerDto {
 
     private int callIdDto;
 
@@ -57,7 +57,7 @@ public class CallDto {
 
     @Override
     public String toString() {
-        return "CallDto{" +
+        return "CallDozerDto{" +
                 "callIdDto=" + callIdDto +
                 ", dateCallDto=" + dateCallDto +
                 ", descriptionDto='" + descriptionDto + '\'' +

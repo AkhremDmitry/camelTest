@@ -86,7 +86,7 @@ public class CrewRestControllerTest {
 
         mockMvc.perform(
                 get("/crews/{id}", ID).accept(MediaType.APPLICATION_JSON)
-        ).andDo(print()).andExpect(status().isFound())
+        ).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("crewId", Matchers.is(ID)))
                 .andExpect(jsonPath("crewName", Matchers.is(NAME)))

@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="
-    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://camel.apache.org/schema/spring
+    http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-  <bean id="dozerConverterLoader" class="org.apache.camel.converter.dozer.DozerTypeConverterLoader" />
+    <context:annotation-config />
 
-  <bean id="mapper" class="org.dozer.DozerBeanMapper">
-    <property name="mappingFiles">
-      <list>
-        <value>dozerBeanMapping.xml</value>
-      </list>
-    </property>
-  </bean>
+    <bean id="objectMapper" class="org.dozer.DozerBeanMapper">
+        <property name="mappingFiles">
+            <list>
+                <value>dozerBeanMapping.xml</value>
+            </list>
+        </property>
+    </bean>
 
-  <bean id="dozerProcessor" class="com.epam.brest.course.camel.DozerProcessor"/>
+    <bean id="jsonMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
-  <camelContext xmlns="http://camel.apache.org/schema/spring">
-    <!-- A Java DSL example is also available at -->
-    <package>org.apache.camel.test</package>
+    <bean id="receiveAndTransformProcessor" class="com.epam.brest.course.camel.ReceiveAndTransformProcessor"/>
 
-
-
-    <route id="camel-http-proxy">
-      <from uri="jetty://http://localhost:8050?matchOnUriPrefix=true"/>
-      <to uri="direct:saveReqBody"/>
-    </route>
-
-    <route>
-      <from uri="direct:req"/>
-      <to uri="http://localhost:8090?bridgeEndpoint=true&amp;throwExceptionOnFailure=false" />
-      <convertBodyTo type="String"/>
-      <setProperty propertyName="respBody">
-        <simple>${in.body}</simple>
-      </setProperty>
-      <process ref="dozerProcessor" />
-      <to uri="file:/home/felix/tmp/resp"/>
-      <setBody>
-        <simple>${property.respBody}</simple>
-      </setBody>
-    </route>
-
-    <route>
-      <from uri="direct:saveReqBody"/>
-      <convertBodyTo type="String"/>
-      <setProperty propertyName="reqBody">
-        <simple>${in.body}</simple>
-      </setProperty>
-      <process ref="dozerProcessor" />
-      <to uri="file:/home/felix/tmp/req?allowNullBody=true"/>
-      <setBody>
-        <simple>${property.reqBody}</simple>
-      </setBody>
-      <to uri="direct:req"/>
-    </route>
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <!-- A Java DSL example is also available at -->
+        <package>org.apache.camel.test</package>
 
 
+        <route id="camel-http-proxy">
+            <from uri="jetty://http://localhost:8050?matchOnUriPrefix=true"/>
+            <to uri="direct:saveReqBody"/>
+        </route>
 
-  </camelContext>
+        <route>
+            <from uri="direct:saveReqBody"/>
+            <convertBodyTo type="String"/>
+            <setProperty propertyName="reqBody">
+                <simple>${in.body}</simple>
+            </setProperty>
+            <process ref="receiveAndTransformProcessor"/>
+            <to uri="file:/home/felix/tmp/req?allowNullBody=true"/>
+            <setBody>
+                <simple>${property.reqBody}</simple>
+            </setBody>
+            <to uri="http://localhost:8090?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
+            <convertBodyTo type="String"/>
+            <setProperty propertyName="respBody">
+                <simple>${in.body}</simple>
+            </setProperty>
+            <process ref="receiveAndTransformProcessor"/>
+            <to uri="file:/home/felix/tmp/resp"/>
+            <setBody>
+                <simple>${property.respBody}</simple>
+            </setBody>
+        </route>
+
+
+    </camelContext>
 </beans>
