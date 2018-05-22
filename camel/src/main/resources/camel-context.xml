@@ -41,7 +41,7 @@
                 <simple>${in.body}</simple>
             </setProperty>
             <process ref="receiveAndTransformProcessor"/>
-            <to uri="file:/home/felix/tmp/req?allowNullBody=true"/>
+            <to uri="file:/home/felix/tmp/req?allowNullBody=true" id="fileReq"/>
             <setBody>
                 <simple>${property.reqBody}</simple>
             </setBody>
@@ -51,7 +51,7 @@
                 <simple>${in.body}</simple>
             </setProperty>
             <process ref="receiveAndTransformProcessor"/>
-            <to uri="file:/home/felix/tmp/resp"/>
+            <to uri="file:/home/felix/tmp/resp" id="fileResp"/>
             <setBody>
                 <simple>${property.respBody}</simple>
             </setBody>
