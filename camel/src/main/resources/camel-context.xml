@@ -34,8 +34,8 @@
             <to uri="direct:saveReqBody"/>
         </route>
 
-        <route>
-            <from uri="direct:saveReqBody"/>
+        <route id="saveReqBody">
+            <from uri="direct:saveReqBody" id="saveBody"/>
             <convertBodyTo type="String"/>
             <setProperty propertyName="reqBody">
                 <simple>${in.body}</simple>
@@ -45,7 +45,7 @@
             <setBody>
                 <simple>${property.reqBody}</simple>
             </setBody>
-            <to uri="http://localhost:8090?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
+            <to uri="http://localhost:8090?bridgeEndpoint=true&amp;throwExceptionOnFailure=false" id="destinationEndpoint"/>
             <convertBodyTo type="String"/>
             <setProperty propertyName="respBody">
                 <simple>${in.body}</simple>
