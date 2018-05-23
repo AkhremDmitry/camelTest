@@ -1,6 +1,7 @@
 package com.epam.brest.course.camel;
 
 import com.epam.brest.course.dao.Call;
+import com.epam.brest.course.dozerDto.CallDozerDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.EndpointInject;
@@ -8,12 +9,14 @@ import org.apache.camel.Exchange;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
+import org.dozer.DozerBeanMapperSingletonWrapper;
+import org.dozer.Mapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ReceiveAndTransformProcessorTest extends CamelSpringTestSupport {
+public class CamelProxyRoteTest extends CamelSpringTestSupport {
 
     @EndpointInject(uri = "mock:destinationEndpoint")
     private MockEndpoint mockDestinationEndpoint;
@@ -42,25 +45,30 @@ public class ReceiveAndTransformProcessorTest extends CamelSpringTestSupport {
     }
 
     @Test
-    public void testMoveFile() throws Exception {
+    public void routeTest() throws Exception {
 
         ObjectMapper jsonMapper = new ObjectMapper();
+        Mapper objectMapper = DozerBeanMapperSingletonWrapper.getInstance();
 
         Call expCall = new Call();
         expCall.setCallId(8);
-        expCall.setAddress("sdfsa");
+        expCall.setAddress("Test address");
         expCall.setDescription("some desc");
         expCall.setCrewId(1);
+        CallDozerDto callDozerDto = objectMapper.map(expCall, CallDozerDto.class);
         JsonNode expJson = jsonMapper.valueToTree(expCall);
+        JsonNode expJsonDto = jsonMapper.valueToTree(callDozerDto);
 
-        mockDestinationEndpoint.expectedMessageCount(0);
         mockDestinationEndpoint.expectedBodiesReceived(expJson.toString());
+        mockFileReq.expectedBodiesReceived(expJsonDto.toString());
+        mockFileResp.expectedMessageCount(1);
 
         template.sendBodyAndHeader("direct:saveReqBody",
                 expJson.toString(), Exchange.HTTP_URL, "http://localhost:8088/call/1");
 
         mockDestinationEndpoint.assertIsSatisfied();
-
+        mockFileReq.assertIsSatisfied();
+        mockFileResp.assertIsSatisfied();
     }
 
     @Override
